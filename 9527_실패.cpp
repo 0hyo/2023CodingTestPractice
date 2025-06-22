@@ -33,13 +33,14 @@ long long hamm_W_Sum(long long N)
     long long ret = 0;
     for (int cnt_i = 54; cnt_i >= 0; cnt_i--)
     {
-            cout << "1 << N : " << N <<"\n";
-            cout << "1 << cnt_i : " << (long long)(1 << cnt_i) <<"\n\n";
+            // cout << "1 << N : " << N <<"\n";
+            // cout << "1 << cnt_i : " << (long long)(1 << cnt_i) <<"\n\n";
         if (N & (1 << cnt_i))
         {
             // cout << "ret : " << ret <<"\n";
             ret += accumulated_bit[cnt_i - 1] + 1;
-            N = N ^ (1 << (cnt_i - 1));
+            // N = N ^ (1 << (cnt_i - 1));
+            N = N - (1 << (cnt_i - 1));
             ret += N;            
         }        
     }
