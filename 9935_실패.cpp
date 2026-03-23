@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+#include <stack>
 
 /*
 상근이는 문자열에 폭발 문자열을 심어 놓았다. 폭발 문자열이 폭발하면 그 문자는 문자열에서 사라지며, 남은 문자열은 합쳐지게 된다.
@@ -33,9 +34,6 @@ FRULA
 
 int main()
 {
-    // ios::sync_with_stdio(false);
-    // cin.tie(NULL);
-    // cout.tie(NULL);
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
@@ -43,6 +41,67 @@ int main()
     string input, boom;
     cin >> input >> boom;
     
+    stack<char> stk, tmp;
+    // cout << "boom : " << boom << endl;
+    // cout << "boom[sizeof(boom) - 1] : " << boom[sizeof(boom)] << endl;
+    // cout << "boom.length() : " << boom.length() << endl;
+    // cout << "input.length() : " << input.length() << endl;
+
+    for (int i = 0; i < input.length(); i++)
+    {
+        // cout << "i : " << i <<endl;
+        stk.push(input[i]);
+        if(stk.top() == boom[boom.length() - 1])
+            {
+                // cout << i <<endl;
+                for (int j = 0; j < boom.length(); j++)
+                {
+                    if(stk.empty() || stk.top() != boom[boom.length() - j - 1] ) 
+                        {
+                            while (!tmp.empty())
+                            {
+                                // cout << "ret "<< endl; 
+                                stk.push(tmp.top());
+                                tmp.pop();
+                            }
+                            break;
+                        }    
+                    else
+                    {
+                        // cout << "j : " << j <<endl;
+                        tmp.push(stk.top());
+                        // cout << "stk.top : " << stk.top() << endl;
+                        stk.pop();
+                        // cout << "tmp.top : " << tmp.top() << endl;
+                        // cout << "stk.top : " << stk.top() << endl;
+                    }
+                        
+                }
+                while (!tmp.empty())
+                {
+                    tmp.pop();
+                }
+                
+            }
+    }
+    // cout << "\n";
+    if(stk.empty())
+        cout << "FRULA";
+    else{
+        while (!stk.empty())
+        {
+            tmp.push(stk.top());
+            stk.pop();
+        }
+        while (!tmp.empty())
+        {
+            cout <<tmp.top();
+            tmp.pop();
+        }
+        
+    }
+        
+                
 
     return 0;
 }
@@ -66,7 +125,7 @@ int main()
     // }
     // if (input == empty_str)
     // {
-    //     cout << "FRULA";
+        // cout << "FRULA";
     // }
     // else
-    //     cout << input;
+        // cout << input;
